@@ -1,0 +1,41 @@
+﻿@page "/login"
+
+@inject NavigationManager NavigationManager
+
+
+<h3>Iniciar sesión</h3>
+
+@if (mensajeError != null)
+{
+    <p style="color: red;">@mensajeError</p>
+}
+
+<form @onsubmit="HandleSubmit">
+    <label>Nombre de usuario:</label>
+    <input type="text" @bind="nombreUsuario" />
+
+    <label>Contraseña:</label>
+    <input type="password" @bind="contrasena" />
+
+    <button type="submit">Iniciar sesión</button>
+</form>
+
+@code {
+    private string nombreUsuario;
+    private string contrasena;
+    private string mensajeError;
+
+    private void HandleSubmit()
+    {
+        // Aquí puedes agregar la lógica de autenticación
+        if (nombreUsuario == "usuario" && contrasena == "contraseña")
+        {
+            // Autenticación exitosa, redirige a otra página
+            NavigationManager.NavigateTo("/dashboard");
+        }
+        else
+        {
+            mensajeError = "Nombre de usuario o contraseña incorrectos.";
+        }
+    }
+}
